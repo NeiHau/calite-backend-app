@@ -13,6 +13,12 @@ import { MongooseModule } from '@nestjs/mongoose';
       driver: ApolloDriver,
       autoSchemaFile: true,
       installSubscriptionHandlers: true,
+      subscriptions: {
+        'graphql-ws': true,
+        'subscriptions-transport-ws': {
+          path: '/graphql',
+        },
+      },
     }),
     ReservationModule,
     MongooseModule.forRoot(
