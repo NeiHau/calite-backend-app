@@ -21,6 +21,10 @@ export class ReservationService {
     return this.reservations;
   }
 
+  getReservationById(id: string): Promise<ReservationDto> {
+    return this.reservationModel.findById(id).exec();
+  }
+
   createReservation(
     name: string,
     gender: string,

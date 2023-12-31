@@ -12,6 +12,7 @@ import { MongooseModule } from '@nestjs/mongoose';
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: true,
+      installSubscriptionHandlers: true,
     }),
     ReservationModule,
     MongooseModule.forRoot(

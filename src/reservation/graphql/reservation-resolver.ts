@@ -12,6 +12,11 @@ export class ReservationResolver {
     return this.reservationService.getReservations();
   }
 
+  @Query(returns => ReservationDto)
+  async getReservation(@Args('id') id: string): Promise<ReservationDto | null> {
+    return this.reservationService.getReservationById(id);
+  }
+
   @Mutation(returns => ReservationDto)
   async createReservation(
     @Args('name') name: string,
