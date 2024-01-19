@@ -37,3 +37,7 @@ lerna-debug.log*
 .env
 
 calite-salon-backend/firebase/calite-backend-firebase-adminsdk-nxhci-3457918e24.json
+
+/firebase-service-account.json
+/nest-cli.json
+/proto-setup

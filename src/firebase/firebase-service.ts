@@ -13,8 +13,6 @@ export default class FirebaseService {
         credential: firebaseAdmin.credential.cert(
           serviceAccount as ServiceAccount,
         ),
-        databaseURL:
-          'https://calite-backend-default-rtdb.asia-southeast1.firebasedatabase.app/',
       });
     }
   }
