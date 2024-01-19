@@ -10,7 +10,7 @@ import mongoose from 'mongoose';
 export class MenuDto {
   @Prop({ required: true })
   @Field()
-  name: string;
+  menuName: string;
 
   @Prop({ required: true })
   @Field(type => Float)
@@ -28,7 +28,7 @@ export class ReservationDto {
 
   @Prop({ required: true })
   @Field()
-  name: string;
+  customerName: string;
 
   @Prop({ required: true })
   @Field()
@@ -46,7 +46,7 @@ export class ReservationDto {
 @InputType()
 export class MenuInput {
   @Field()
-  name: string;
+  menuName: string;
 
   @Field(type => Float)
   price: number;

@@ -6,7 +6,7 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "build": "nest build",
+    "build": "nest build && cp -r src/features/contact dist/src/features/",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
@@ -17,16 +17,22 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "proto-setup": "./proto-setup"
   },
   "dependencies": {
     "@apollo/server": "^4.9.5",
+    "@grpc/grpc-js": "^1.9.14",
+    "@grpc/proto-loader": "^0.7.10",
     "@nestjs/apollo": "^12.0.11",
     "@nestjs/common": "^10.0.0",
     "@nestjs/config": "^3.1.1",
     "@nestjs/core": "^10.0.0",
     "@nestjs/graphql": "^12.0.11",
+    "@nestjs/jwt": "^10.2.0",
+    "@nestjs/microservices": "^10.3.0",
     "@nestjs/mongoose": "^10.0.2",
+    "@nestjs/passport": "^10.0.3",
     "@nestjs/platform-express": "^10.0.0",
     "apollo-server-express": "^3.13.0",
     "dotenv": "^16.3.1",
@@ -37,9 +43,12 @@
     "graphql-tools": "^9.0.0",
     "graphql-ws": "^5.14.3",
     "mongoose": "^8.0.3",
+    "passport": "^0.7.0",
+    "passport-jwt": "^4.0.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1",
     "subscriptions-transport-ws": "^0.11.0",
+    "ts-proto": "^1.166.3",
     "uuid": "^9.0.1"
   },
   "devDependencies": {
@@ -62,6 +71,7 @@
     "ts-jest": "^29.1.0",
     "ts-loader": "^9.4.3",
     "ts-node": "^10.9.1",
+    "ts-protoc-gen": "^0.15.0",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.1.3"
   },

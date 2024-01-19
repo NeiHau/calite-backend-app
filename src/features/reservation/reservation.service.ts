@@ -7,6 +7,9 @@ import {
   Reservation,
   ReservationDocument,
 } from 'src/schema/reservation.schema';
+import { firebaseApp } from 'src/main';
+import { getFirestore } from 'firebase/firestore';
+import { doc, setDoc } from 'firebase/firestore';
 
 @Injectable()
 export class ReservationService {
@@ -14,6 +17,8 @@ export class ReservationService {
     @InjectModel(Reservation.name)
     private reservationModel: Model<ReservationDocument>,
   ) {}
+
+  private db = getFirestore(firebaseApp);
 
   private reservations: ReservationDto[] = [];
 
@@ -25,21 +30,27 @@ export class ReservationService {
     return this.reservationModel.findById(id).exec();
   }
 
-  createReservation(
-    name: string,
+  async createReservation(
+    customerName: string,
     gender: string,
     age: number,
     menu: MenuInput,
   ): Promise<Reservation> {
     const reservation: ReservationDto = {
       id: uuidv4(),
-      name: name,
+      customerName: customerName,
       gender: gender,
       age: age,
       menu: menu,
     };
 
+    // MongoDB
     const createdReservation = new this.reservationModel(reservation);
-    return createdReservation.save();
+    await createdReservation.save();
+
+    // Firestore
+    await setDoc(doc(this.db, 'reservations', reservation.id), reservation);
+
+    return createdReservation;
   }
 }

@@ -6,7 +6,7 @@ export type ReservationDocument = HydratedDocument<Reservation>;
 @Schema()
 export class Menu {
   @Prop()
-  name: string;
+  menuName: string;
 
   @Prop()
   price: number;
@@ -21,7 +21,7 @@ export class Reservation {
   id: string;
 
   @Prop()
-  name: string;
+  customerName: string;
 
   @Prop()
   gender: string;

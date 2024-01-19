@@ -22,13 +22,13 @@ export class ReservationResolver {
 
   @Mutation(returns => ReservationDto)
   async createReservation(
-    @Args('name') name: string,
+    @Args('customerName') customerName: string,
     @Args('gender') gender: string,
     @Args('age') age: number,
     @Args('menu') menu: MenuInput,
   ) {
     const reservation = this.reservationService.createReservation(
-      name,
+      customerName,
       gender,
       age,
       menu,

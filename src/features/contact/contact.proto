@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package contact;
+
+// メッセージ送信のためのサービスを定義
+service MessageService {
+  // メッセージを送信するメソッドを定義
+  rpc SendMessage (SendMessageRequest) returns (SendMessageResponse);
+}
+
+// メッセージ送信リクエストのデータ構造を定義
+message SendMessageRequest {
+  string content = 1;     // 送信するメッセージの内容
+  string senderId = 2;    // 送信者のユーザーID
+  string chatRoomId = 3;  // 送信先のチャットルームID
+  int64 date = 4; 
+}
+
+// メッセージ送信レスポンスのデータ構造を定義
+message SendMessageResponse {
+  string id = 1;          // 送信されたメッセージのID
+  bool success = 2;       // 送信の成功または失敗
+  string errorMessage = 3;// エラーメッセージ（送信に失敗した場合）
+}
