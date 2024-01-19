@@ -7,8 +7,6 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { MongooseModule } from '@nestjs/mongoose';
 import { FirebaseAuthModule } from '../auth/auth-module';
-import { ClientsModule, Transport } from '@nestjs/microservices';
-import { join } from 'path';
 import { ContactModule } from '../contact/contact.module';
 
 @Module({
