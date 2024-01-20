@@ -5,7 +5,7 @@ import {
   SendMessageRequest,
   SendMessageResponse,
 } from '../../../_proto/contact';
-import { MessageService } from '../../../service/features/contact/service/contact.controller';
+import { MessageService } from 'src/service/features/contact/contact.controller';
 
 @Injectable()
 export class GrpcClientService implements OnModuleInit {

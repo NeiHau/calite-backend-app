@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { ContactDto } from './contact.dto';
-import { ContactService } from '../../../service/features/contact/service/contact.service';
 import { GrpcClientService } from './contact.grpc.client';
 
 @Resolver(of => ContactDto)
-export default class ContactResolver {
+export class ContactResolver {
   constructor(private readonly grpcClient: GrpcClientService) {}
 
   @Mutation(() => ContactDto)

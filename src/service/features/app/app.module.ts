@@ -7,6 +7,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { MongooseModule } from '@nestjs/mongoose';
 import { FirebaseAuthModule } from '../auth/auth-module';
 import { ContactModule } from '../contact/contact.module';
+import { ContactBffModule } from 'src/bff/features/contact/contact.bff.module';
 
 @Module({
   imports: [
@@ -24,19 +25,10 @@ import { ContactModule } from '../contact/contact.module';
     ReservationModule,
     FirebaseAuthModule,
     ContactModule,
+    ContactBffModule,
     MongooseModule.forRoot(
       'mongodb+srv://Geroppa:Geroppa1210@cluster0.k68p5ks.mongodb.net/?retryWrites=true&w=majority',
     ),
-    // ClientsModule.register([
-    //   {
-    //     name: 'CONTACT_PACKAGE',
-    //     transport: Transport.GRPC,
-    //     options: {
-    //       package: 'hero',
-    //       protoPath: join(__dirname, '..', './features/contact/contact.proto'),
-    //     },
-    //   },
-    // ]),
   ],
   controllers: [AppController],
   providers: [AppService],

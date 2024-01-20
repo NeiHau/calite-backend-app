@@ -1,5 +1,6 @@
-import { Field, InputType } from '@nestjs/graphql';
+import { Field, InputType, ObjectType } from '@nestjs/graphql';
 
+@ObjectType()
 export class ContactDto {
   @Field()
   messageId: string;

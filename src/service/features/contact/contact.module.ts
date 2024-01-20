@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
 import FirebaseService from 'src/service/firebase/firebase-service';
-import { ContactService } from './service/contact.service';
-import { MessageService } from './service/contact.controller';
+
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { join } from 'path';
+import { MessageService } from './contact.controller';
+import { ContactService } from './contact.service';
 
 @Module({
   imports: [
-    // GrpcClientModule,
     ClientsModule.register([
       {
         name: 'MESSAGE_SERVICE',
@@ -24,6 +24,6 @@ import { join } from 'path';
   ],
   controllers: [MessageService],
   providers: [FirebaseService, ContactService],
-  exports: [ContactService, ClientsModule],
+  exports: [FirebaseService, ContactService, ClientsModule],
 })
 export class ContactModule {}

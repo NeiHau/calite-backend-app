@@ -1,23 +1,16 @@
 import { Injectable } from '@nestjs/common';
-import { initializeApp, getApp, getApps } from 'firebase-admin/app';
-import { getFirestore, Firestore } from 'firebase-admin/firestore';
-import {
-  SendMessageRequest,
-  SendMessageResponse,
-} from '../../../../_proto/contact';
+import { Firestore } from 'firebase-admin/firestore';
+import { SendMessageRequest, SendMessageResponse } from 'src/_proto/contact';
+import FirebaseService from 'src/service/firebase/firebase-service';
 
 @Injectable()
 export class ContactService {
   private db: Firestore;
 
-  constructor() {
-    // Firebase Admin SDKの初期化（既に初期化されていない場合）
-    if (getApps().length === 0) {
-      initializeApp();
-    }
-
-    // Firestoreの初期化
-    this.db = getFirestore(getApp());
+  constructor(
+    private firebaseService: FirebaseService, // FirebaseService を注入
+  ) {
+    this.db = this.firebaseService.getFirestore(); // Firestore インスタンスの取得
   }
 
   async createMessage(
@@ -25,7 +18,6 @@ export class ContactService {
   ): Promise<SendMessageResponse> {
     try {
       const { chatRoomId, content, senderId, date } = messageData;
-
       const dateValue = typeof date === 'number' ? date : Number(date);
 
       const docRef = this.db

@@ -1,10 +1,8 @@
 import { Controller } from '@nestjs/common';
 import { GrpcMethod } from '@nestjs/microservices';
-import {
-  SendMessageRequest,
-  SendMessageResponse,
-} from '../../../../_proto/contact';
+
 import { ContactService } from './contact.service';
+import { SendMessageRequest, SendMessageResponse } from 'src/_proto/contact';
 
 @Controller()
 export class MessageService {
