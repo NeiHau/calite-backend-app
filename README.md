@@ -18,11 +18,12 @@ FEからのリクエストをBEサービスにルーティングします。
 
 Firebase、MongoDB
 
-## 技術スタック
+## 主な技術スタック
 
-NestJS
-Typescript
-Firebase
-GraphQL
-gRPC
-MongoDB
+NestJS,
+Typescript,
+Firebase,
+GraphQL,
+Apollo Client,
+gRPC,
+MongoDB,
