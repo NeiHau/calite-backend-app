@@ -12,7 +12,7 @@ gRPC通信を使用して、効率的で型安全な方法でBFF層と通信。
 
 ## DB
 
-Firebaseを使用
+Firebase、MongoDB
 
 ## 技術スタック
 
