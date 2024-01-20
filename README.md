@@ -14,6 +14,8 @@ FEからのリクエストをBEサービスにルーティングします。
 
 別プロジェクトにて管理。
 
+https://github.com/NeiHau/calite-frontend-app
+
 ## DB
 
 Firebase、MongoDB
