@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ReservationService } from './reservation.service';
 import { ReservationResolver } from './graphql/reservation-resolver';
-import { Reservation, ReservationSchema } from 'src/schema/reservation.schema';
+import { Reservation, ReservationSchema } from 'src/graphql/reservation.schema';
 
 @Module({
   imports: [

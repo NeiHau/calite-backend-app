@@ -18,7 +18,7 @@ export interface SendMessageRequest {
 /** メッセージ送信レスポンスのデータ構造を定義 */
 export interface SendMessageResponse {
   /** 送信されたメッセージのID */
-  id: string;
+  messageId: string;
   /** 送信の成功または失敗 */
   success: boolean;
   /** エラーメッセージ（送信に失敗した場合） */

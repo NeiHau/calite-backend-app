@@ -3,7 +3,7 @@ import { randomBytes } from 'crypto';
 import { JwtModule } from '@nestjs/jwt';
 import AuthService from './auth-service';
 import AuthResolver from './graphql/auth-resolver';
-import FirebaseService from 'src/firebase/firebase-service';
+import FirebaseService from 'src/service/firebase/firebase-service';
 
 const secretKey = randomBytes(32).toString('hex');
 

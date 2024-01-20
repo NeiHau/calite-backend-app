@@ -1,13 +1,16 @@
 import { Controller } from '@nestjs/common';
 import { GrpcMethod } from '@nestjs/microservices';
-import { SendMessageRequest, SendMessageResponse } from './contact';
+import {
+  SendMessageRequest,
+  SendMessageResponse,
+} from '../../../../_proto/contact';
 import { ContactService } from './contact.service';
 
 @Controller()
-export class ContactController {
+export class MessageService {
   constructor(private readonly contactService: ContactService) {}
 
-  @GrpcMethod('MessageService', 'SendMessage')
+  @GrpcMethod()
   async sendMessage(data: SendMessageRequest): Promise<SendMessageResponse> {
     try {
       // Firestoreにメッセージを保存
@@ -20,7 +23,7 @@ export class ContactController {
 
       // 成功した場合
       return {
-        id: messageId,
+        messageId: messageId,
         success: success,
         errorMessage: '',
       };
@@ -28,7 +31,7 @@ export class ContactController {
       // エラーが発生した場合
       console.error('Error sending message:', error);
       return {
-        id: '',
+        messageId: '',
         success: false,
         errorMessage: error.message,
       };

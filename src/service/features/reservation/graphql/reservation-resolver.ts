@@ -8,7 +8,7 @@ const pubSub = new PubSub();
 
 @Resolver(of => ReservationDto)
 export class ReservationResolver {
-  constructor(private reservationService: ReservationService) {}
+  constructor(private readonly reservationService: ReservationService) {}
 
   @Query(returns => [ReservationDto])
   async reservations(): Promise<ReservationDto[]> {

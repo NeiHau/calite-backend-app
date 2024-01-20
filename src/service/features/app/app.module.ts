@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ReservationController } from '../reservation/reservation.controller';
 import { ReservationModule } from '../reservation/reservation.module';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
@@ -39,7 +38,7 @@ import { ContactModule } from '../contact/contact.module';
     //   },
     // ]),
   ],
-  controllers: [AppController, ReservationController],
+  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}

@@ -1,6 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { initializeApp, getApp, getApps } from 'firebase-admin/app';
 import { getFirestore, Firestore } from 'firebase-admin/firestore';
+import {
+  SendMessageRequest,
+  SendMessageResponse,
+} from '../../../../_proto/contact';
 
 @Injectable()
 export class ContactService {
@@ -16,33 +20,39 @@ export class ContactService {
     this.db = getFirestore(getApp());
   }
 
-  async createMessage(messageData: {
-    chatRoomId: string;
-    content: string;
-    senderId: string;
-    date: number;
-  }): Promise<{ messageId: string; success: boolean }> {
+  async createMessage(
+    messageData: SendMessageRequest,
+  ): Promise<SendMessageResponse> {
     try {
-      const dateValue =
-        typeof messageData.date === 'number'
-          ? messageData.date
-          : Number(messageData.date);
+      const { chatRoomId, content, senderId, date } = messageData;
+
+      const dateValue = typeof date === 'number' ? date : Number(date);
 
       const docRef = this.db
         .collection('messages')
-        .doc(messageData.chatRoomId)
+        .doc(chatRoomId)
         .collection('messages')
         .doc();
       await docRef.set({
-        content: messageData.content,
-        senderId: messageData.senderId,
+        content: content,
+        senderId: senderId,
         date: dateValue,
       });
 
-      return { messageId: docRef.id, success: true };
+      const response: SendMessageResponse = {
+        messageId: docRef.id,
+        success: true,
+        errorMessage: '',
+      };
+      return response;
     } catch (error) {
       console.error('Error saving message:', error);
-      throw error;
+      const response: SendMessageResponse = {
+        messageId: '',
+        success: false,
+        errorMessage: error.message,
+      };
+      return response;
     }
   }
 }

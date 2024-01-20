@@ -6,7 +6,7 @@ import { Model } from 'mongoose';
 import {
   Reservation,
   ReservationDocument,
-} from 'src/schema/reservation.schema';
+} from 'src/graphql/reservation.schema';
 import { firebaseApp } from 'src/main';
 import { getFirestore } from 'firebase/firestore';
 import { doc, setDoc } from 'firebase/firestore';

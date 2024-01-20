@@ -1,5 +1,5 @@
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './features/app/app.module';
+import { AppModule } from './service/features/app/app.module';
 import { initializeApp } from 'firebase/app';
 import * as dotenv from 'dotenv';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
@@ -25,7 +25,9 @@ async function bootstrap() {
     transport: Transport.GRPC,
     options: {
       package: 'contact',
-      protoPath: join(__dirname, '..', './features/contact/contact.proto'),
+      protoPath: join(
+        '/Users/uchidakaito/Downloads/nest-js-app/calite-salon-backend/dist/_proto/contact.proto',
+      ),
       url: '0.0.0.0:5002',
     },
   });
