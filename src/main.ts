@@ -16,10 +16,10 @@ const firebaseConfig = {
   appId: process.env.APP_ID,
 };
 
-export const firebaseApp = initializeApp(firebaseConfig); // Firebase初期化
+export const firebaseApp = initializeApp(firebaseConfig);
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule); // NestJSアプリケーションの初期化
+  const app = await NestFactory.create(AppModule);
 
   app.connectMicroservice<MicroserviceOptions>({
     transport: Transport.GRPC,
@@ -29,6 +29,14 @@ async function bootstrap() {
         '/Users/uchidakaito/Downloads/nest-js-app/calite-salon-backend/dist/_proto/contact.proto',
       ),
       url: '0.0.0.0:5002',
+    },
+  });
+
+  app.connectMicroservice<MicroserviceOptions>({
+    transport: Transport.REDIS,
+    options: {
+      host: 'localhost',
+      port: 6379,
     },
   });
 

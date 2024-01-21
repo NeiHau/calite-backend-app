@@ -10,15 +10,19 @@ service MessageService {
 
 // メッセージ送信リクエストのデータ構造を定義
 message SendMessageRequest {
-  string content = 1;     // 送信するメッセージの内容
-  string senderId = 2;    // 送信者のユーザーID
-  string chatRoomId = 3;  // 送信先のチャットルームID
-  int64 date = 4; 
+  string messageId = 1;
+  string content = 2;     // 送信するメッセージの内容
+  string senderId = 3;    // 送信者のユーザーID
+  string chatRoomId = 4;  // 送信先のチャットルームIDme
+  int64 date = 5; 
 }
 
 // メッセージ送信レスポンスのデータ構造を定義
 message SendMessageResponse {
-  string messageId = 1;          // 送信されたメッセージのID
-  bool success = 2;       // 送信の成功または失敗
-  string errorMessage = 3;// エラーメッセージ（送信に失敗した場合）
+  string messageId = 1;   // 送信されたメッセージのID
+  string content = 2;
+  string senderId = 3; //
+  string chatRoomId = 4; //
+  bool success = 5;       // 送信の成功または失敗
+  string errorMessage = 6;// エラーメッセージ（送信に失敗した場合）
 }

@@ -10,17 +10,17 @@ const pubSub = new PubSub();
 export class ReservationResolver {
   constructor(private readonly reservationService: ReservationService) {}
 
-  @Query(returns => [ReservationDto])
+  @Query(() => [ReservationDto])
   async reservations(): Promise<ReservationDto[]> {
     return this.reservationService.getReservations();
   }
 
-  @Query(returns => ReservationDto)
+  @Query(() => ReservationDto)
   async getReservation(@Args('id') id: string): Promise<ReservationDto | null> {
     return this.reservationService.getReservationById(id);
   }
 
-  @Mutation(returns => ReservationDto)
+  @Mutation(() => ReservationDto)
   async createReservation(
     @Args('customerName') customerName: string,
     @Args('gender') gender: string,
@@ -37,7 +37,7 @@ export class ReservationResolver {
     return reservation;
   }
 
-  @Subscription(returns => ReservationDto)
+  @Subscription(() => ReservationDto)
   newReservation() {
     return pubSub.asyncIterator('newReservation');
   }

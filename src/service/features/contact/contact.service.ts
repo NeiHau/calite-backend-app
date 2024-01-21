@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Firestore } from 'firebase-admin/firestore';
 import { SendMessageRequest, SendMessageResponse } from 'src/_proto/contact';
 import FirebaseService from 'src/service/firebase/firebase-service';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class ContactService {
@@ -17,7 +18,7 @@ export class ContactService {
     messageData: SendMessageRequest,
   ): Promise<SendMessageResponse> {
     try {
-      const { chatRoomId, content, senderId, date } = messageData;
+      const { messageId, content, senderId, chatRoomId, date } = messageData;
       const dateValue = typeof date === 'number' ? date : Number(date);
 
       const docRef = this.db
@@ -26,25 +27,33 @@ export class ContactService {
         .collection('messages')
         .doc();
       await docRef.set({
+        messageId: messageId ?? docRef.id,
         content: content,
         senderId: senderId,
+        chatRoomId: chatRoomId ?? uuidv4,
         date: dateValue,
+        success: true,
       });
 
       const response: SendMessageResponse = {
-        messageId: docRef.id,
+        messageId: messageId ?? docRef.id,
+        content: content,
+        senderId: senderId,
+        chatRoomId: chatRoomId,
         success: true,
         errorMessage: '',
       };
       return response;
     } catch (error) {
       console.error('Error saving message:', error);
-      const response: SendMessageResponse = {
+      return {
         messageId: '',
+        content: '',
+        senderId: '',
+        chatRoomId: '',
         success: false,
         errorMessage: error.message,
       };
-      return response;
     }
   }
 }

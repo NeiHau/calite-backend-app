@@ -3,36 +3,36 @@ import { GrpcMethod } from '@nestjs/microservices';
 
 import { ContactService } from './contact.service';
 import { SendMessageRequest, SendMessageResponse } from 'src/_proto/contact';
+import { Observable, catchError, from, map } from 'rxjs';
 
 @Controller()
 export class MessageService {
   constructor(private readonly contactService: ContactService) {}
 
-  @GrpcMethod()
-  async sendMessage(data: SendMessageRequest): Promise<SendMessageResponse> {
-    try {
-      // Firestoreにメッセージを保存
-      const { messageId, success } = await this.contactService.createMessage({
-        chatRoomId: data.chatRoomId,
-        content: data.content,
-        senderId: data.senderId,
-        date: data.date,
-      });
-
-      // 成功した場合
-      return {
-        messageId: messageId,
-        success: success,
-        errorMessage: '',
-      };
-    } catch (error) {
-      // エラーが発生した場合
-      console.error('Error sending message:', error);
-      return {
-        messageId: '',
-        success: false,
-        errorMessage: error.message,
-      };
-    }
+  @GrpcMethod('MessageService', 'sendMessage')
+  sendMessage(data: SendMessageRequest): Observable<SendMessageResponse> {
+    return from(this.contactService.createMessage(data)).pipe(
+      map(response => ({
+        messageId: response.messageId,
+        content: response.content,
+        senderId: response.senderId,
+        chatRoomId: response.chatRoomId,
+        success: response.success,
+        errorMessage: response.errorMessage ?? '',
+      })),
+      catchError(error => {
+        console.error('Error sending message:', error);
+        return from([
+          {
+            messageId: '',
+            content: '',
+            senderId: '',
+            chatRoomId: '',
+            success: false,
+            errorMessage: error.message,
+          },
+        ]);
+      }),
+    );
   }
 }

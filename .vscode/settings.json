@@ -6,6 +6,7 @@
     "firebaseapp",
     "Geroppa",
     "gserviceaccount",
+    "lpush",
     "nestjs",
     "oneofs",
     "predeploy",
@@ -14,7 +15,9 @@
     "protoc",
     "retunrs",
     "uchidakaito",
-    "uuidv"
+    "uuidv",
+    "websockets",
+    "xadd"
   ],
   "editor.autoSurround": "languageDefined",
   "editor.codeActionsOnSave": {},

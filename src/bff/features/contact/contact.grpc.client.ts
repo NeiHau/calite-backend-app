@@ -6,6 +6,7 @@ import {
   SendMessageResponse,
 } from '../../../_proto/contact';
 import { MessageService } from 'src/service/features/contact/contact.controller';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class GrpcClientService implements OnModuleInit {
@@ -18,7 +19,7 @@ export class GrpcClientService implements OnModuleInit {
       this.client.getService<MessageService>('MessageService');
   }
 
-  async sendMessage(data: SendMessageRequest): Promise<SendMessageResponse> {
-    return await this.messageService.sendMessage(data);
+  sendMessage(data: SendMessageRequest): Observable<SendMessageResponse> {
+    return this.messageService.sendMessage(data);
   }
 }
